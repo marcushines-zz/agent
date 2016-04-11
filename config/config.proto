@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+import "github.com/reference/rpc/openconfig/openconfig.proto"
+
+// Package config defines the file format for agent configurations.
+package openconfig.agent.config;
+
+message Configuration {
+
+}
+
+message Schedule {
+  repeated Event events = 1;
+}
+
+message Close {}
+
+message Event {
+  oneof action {
+    openconfig.Notification notification = 1;
+    openconfig.Error error = 2;
+    openconfig.Heartbeat heartbeat = 3;
+    Close close = 4;
+  }
+}
